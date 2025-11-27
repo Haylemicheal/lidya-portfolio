@@ -136,7 +136,7 @@ const Index = () => {
         </div>
         <div className="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto">
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6 text-balance">
-            Lidya Abrha
+            Lidya Alemayehu
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 text-white/90 font-light">
             Visual Painter
@@ -170,7 +170,7 @@ const Index = () => {
               </h2>
               <div className="space-y-4 sm:space-y-5 text-muted-foreground leading-relaxed text-sm sm:text-base">
                 <p>
-                  My name is Lidya Abraha, and I am 26 years old. I grew up in a
+                  My name is Lidya Alemayehu, and I am 26 years old. I grew up in a
                   small city in Northern Ethiopia a close, diverse community
                   where stories were shared openly. From neighbors worrying
                   about school fees, to young people planning uncertain
@@ -199,7 +199,7 @@ const Index = () => {
               <div className="relative aspect-square max-w-md mx-auto">
                 <Image
                   src={artistPortrait}
-                  alt="Lidya Abrha"
+                  alt="Lidya Alemayehu"
                   className="rounded-lg object-cover shadow-xl "
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -252,7 +252,7 @@ const Index = () => {
       <footer className="py-8 sm:py-12 bg-foreground text-background border-t border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm sm:text-base">
-            © {new Date().getFullYear()} Lidya Abrha. All rights reserved.
+            © {new Date().getFullYear()} Lidya Alemayehu. All rights reserved.
           </p>
         </div>
       </footer>
