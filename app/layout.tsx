@@ -15,9 +15,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Lidya Abrha | Contemporary Artist & Painter",
-  description:
-    "Portfolio of Lidya Abrha, a contemporary artist specializing in abstract and landscape paintings.",
+  title: "Lidya Abrha | Visual Painter",
+  description: "Portfolio of Lidya Abrha, a Visual artist.",
 };
 
 export default function RootLayout({
