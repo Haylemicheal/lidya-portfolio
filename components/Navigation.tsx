@@ -44,7 +44,7 @@ const Navigation = () => {
               isScrolled ? "text-foreground" : "text-white"
             } hover:opacity-80`}
           >
-            Lidya Abrha
+            Lidya Alemayehu
           </button>
 
           {/* Desktop Navigation */}
