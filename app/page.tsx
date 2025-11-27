@@ -5,7 +5,7 @@ import ArtworkCard from "@/components/ArtworkCard";
 import ContactForm from "@/components/ContactForm";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
-import heroImage from "@/assets/hero-studio.jpg";
+import heroImage from "@/assets/bg.jpg";
 import artistPortrait from "@/assets/artist-2.jpg";
 import artwork1 from "@/assets/art1.jpg";
 import artwork2 from "@/assets/art2.jpg";
@@ -139,7 +139,7 @@ const Index = () => {
             Lidya Abrha
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 text-white/90 font-light">
-            Contemporary Artist & Painter
+            Visual Painter
           </p>
           <Button
             onClick={() => scrollToSection("portfolio")}
