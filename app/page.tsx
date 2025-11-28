@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import ArtworkCard from "@/components/ArtworkCard";
 import ContactForm from "@/components/ContactForm";
 import { Button } from "@/components/ui/button";
+import Link from 'next/link';
 import { ArrowDown } from "lucide-react";
 import heroImage from "@/assets/bg.jpg";
 import artistPortrait from "@/assets/artist-2.jpg";
