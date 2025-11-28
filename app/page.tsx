@@ -255,6 +255,19 @@ const Index = () => {
             © {new Date().getFullYear()} Lidya Alemayehu. All rights reserved.
           </p>
         </div>
+        <div className='mt-6 border-t border-gray-700 pt-4 text-center'>
+          <p className='text-xs text-white'>
+            Powered by{' '}
+            <Link
+              href='https://www.bilikolabs.com/'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='hover:underline font-medium'
+            >
+              Biliko Labs
+            </Link>
+          </p>
+        </div>
       </footer>
     </div>
   );
