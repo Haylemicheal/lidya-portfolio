@@ -22,6 +22,7 @@ import artwork11 from "@/assets/art11.jpg";
 import artwork12 from "@/assets/art12.jpg";
 import artwork13 from "@/assets/art13.jpg";
 import artwork14 from "@/assets/art14.jpg";
+import artwork15 from "@/assets/art15.jpg";
 
 const artworks = [
   {
@@ -107,6 +108,12 @@ const artworks = [
     title: "Starry Night",
     description:
       "An impressionist homage to Vincent van Gogh's celebrated work, capturing the swirling night sky and the emotional resonance of the original through expressive brushwork and vibrant color.",
+  },
+  {
+    image: artwork15,
+    title: "The Kiss",
+    description:
+      "Artistic style is symbolism ( after Gustav Klimt )",
   },
 ];
 
