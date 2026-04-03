@@ -129,7 +129,7 @@ const artworks = [
     image: artwork16,
     title: "The Quiet Morning",
     description:
-      "3x30x21",
+      "30x21",
   },
   {
     image: artwork17,
@@ -165,7 +165,7 @@ const artworks = [
     image: artwork22,
     title: "The Keeper of Tradition",
     description:
-      "2x30x21",
+      "30x21",
   },
   {
     image: artwork23,
