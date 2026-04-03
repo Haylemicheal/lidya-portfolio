@@ -25,6 +25,9 @@ import artwork14 from "@/assets/art14.jpg";
 import artwork15 from "@/assets/art15.jpg";
 import artwork15 from "@/assets/art16.jpg";
 import artwork15 from "@/assets/art17.jpg";
+import artwork15 from "@/assets/art18.jpg";
+import artwork15 from "@/assets/art19.jpg";
+import artwork15 from "@/assets/art20.jpg";
 
 const artworks = [
   {
@@ -122,6 +125,24 @@ const artworks = [
     title: "Sisters in Ochre",
     description:
       "50x40",
+  },
+  {
+    image: artwork18,
+    title: "Emerald Gaze",
+    description:
+      "30x21",
+  },
+  {
+    image: artwork19,
+    title: "Patterns of Grace",
+    description:
+      "40x50",
+  },
+  {
+    image: artwork20,
+    title: "The Evening Toast",
+    description:
+      "40x50",
   },
 ];
 
