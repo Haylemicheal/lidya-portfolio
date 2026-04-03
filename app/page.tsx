@@ -32,6 +32,7 @@ import artwork21 from "@/assets/art21.jpg";
 import artwork22 from "@/assets/art22.png";
 import artwork23 from "@/assets/art23.jpg";
 import artwork24 from "@/assets/art24.png";
+import artwork24 from "@/assets/art25.jpg";
 
 const artworks = [
   {
@@ -145,6 +146,12 @@ const artworks = [
   {
     image: artwork19,
     title: "Patterns of Grace",
+    description:
+      "40x50",
+  },
+  {
+    image: artwork25,
+    title: "The Fragrance of Memory ",
     description:
       "40x50",
   },
