@@ -32,7 +32,7 @@ import artwork21 from "@/assets/art21.jpg";
 import artwork22 from "@/assets/art22.png";
 import artwork23 from "@/assets/art23.jpg";
 import artwork24 from "@/assets/art24.png";
-import artwork24 from "@/assets/art25.jpg";
+import artwork25 from "@/assets/art25.jpg";
 
 const artworks = [
   {
