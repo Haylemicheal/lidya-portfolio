@@ -30,6 +30,9 @@ import artwork19 from "@/assets/art19.jpg";
 import artwork20 from "@/assets/art20.jpg";
 import artwork21 from "@/assets/art21.jpg";
 import artwork22 from "@/assets/art20.jpg";
+import artwork23 from "@/assets/art23.jpg";
+import artwork24 from "@/assets/art24.jpg";
+import artwork25 from "@/assets/art25.jpg";
 
 const artworks = [
   {
@@ -157,6 +160,24 @@ const artworks = [
     title: "The Keeper of Tradition",
     description:
       "2x30x21",
+  },
+  {
+    image: artwork23,
+    title: "The Essence of coffee",
+    description:
+      "40x50",
+  },
+  {
+    image: artwork24,
+    title: "Nature’s Splendor",
+    description:
+      "30x21",
+  },
+  {
+    image: artwork25,
+    title: "Abundance in Crimson",
+    description:
+      "30x21",
   },
 ];
 
