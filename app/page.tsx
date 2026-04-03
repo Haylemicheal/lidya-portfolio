@@ -23,6 +23,8 @@ import artwork12 from "@/assets/art12.jpg";
 import artwork13 from "@/assets/art13.jpg";
 import artwork14 from "@/assets/art14.jpg";
 import artwork15 from "@/assets/art15.jpg";
+import artwork15 from "@/assets/art16.jpg";
+import artwork15 from "@/assets/art17.jpg";
 
 const artworks = [
   {
@@ -114,6 +116,12 @@ const artworks = [
     title: "The Kiss",
     description:
       "Artistic style is symbolism ( after Gustav Klimt )",
+  },
+  {
+    image: artwork17,
+    title: "Sisters in Ochre",
+    description:
+      "50x40",
   },
 ];
 
