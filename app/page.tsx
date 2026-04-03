@@ -29,7 +29,7 @@ import artwork18 from "@/assets/art18.jpg";
 import artwork19 from "@/assets/art19.jpg";
 import artwork20 from "@/assets/art20.jpg";
 import artwork21 from "@/assets/art21.jpg";
-import artwork22 from "@/assets/art22.jpg";
+import artwork22 from "@/assets/art22.png";
 import artwork23 from "@/assets/art23.jpg";
 import artwork24 from "@/assets/art24.jpg";
 import artwork25 from "@/assets/art25.jpg";
