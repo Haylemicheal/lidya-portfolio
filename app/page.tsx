@@ -31,8 +31,7 @@ import artwork20 from "@/assets/art20.jpg";
 import artwork21 from "@/assets/art21.jpg";
 import artwork22 from "@/assets/art22.png";
 import artwork23 from "@/assets/art23.jpg";
-import artwork24 from "@/assets/art24.jpg";
-import artwork25 from "@/assets/art25.jpg";
+import artwork24 from "@/assets/art24.png";
 
 const artworks = [
   {
@@ -172,13 +171,7 @@ const artworks = [
     title: "Nature’s Splendor",
     description:
       "30x21",
-  },
-  {
-    image: artwork25,
-    title: "Abundance in Crimson",
-    description:
-      "30x21",
-  },
+  }
 ];
 
 const Index = () => {
