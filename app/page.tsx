@@ -23,11 +23,13 @@ import artwork12 from "@/assets/art12.jpg";
 import artwork13 from "@/assets/art13.jpg";
 import artwork14 from "@/assets/art14.jpg";
 import artwork15 from "@/assets/art15.jpg";
-import artwork16 from "@/assets/art16.jpg";
+import artwork16 from "@/assets/art16.png";
 import artwork17 from "@/assets/art17.jpg";
 import artwork18 from "@/assets/art18.jpg";
 import artwork19 from "@/assets/art19.jpg";
 import artwork20 from "@/assets/art20.jpg";
+import artwork21 from "@/assets/art21.jpg";
+import artwork22 from "@/assets/art20.jpg";
 
 const artworks = [
   {
@@ -121,6 +123,12 @@ const artworks = [
       "Artistic style is symbolism ( after Gustav Klimt )",
   },
   {
+    image: artwork16,
+    title: "The Quiet Morning",
+    description:
+      "3x30x21",
+  },
+  {
     image: artwork17,
     title: "Sisters in Ochre",
     description:
@@ -143,6 +151,12 @@ const artworks = [
     title: "The Evening Toast",
     description:
       "40x50",
+  },
+  {
+    image: artwork22,
+    title: "The Keeper of Tradition",
+    description:
+      "2x30x21",
   },
 ];
 
