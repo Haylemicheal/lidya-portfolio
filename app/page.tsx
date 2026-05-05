@@ -211,7 +211,7 @@ const Index = () => {
             Lidya Alemayehu
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 text-white/90 font-light">
-            Visual Painter
+            Visual Artist
           </p>
           <Button
             onClick={() => scrollToSection("portfolio")}
