@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Lidya Abrha | Visual Painter",
+  title: "Lidya Abrha | Visual Artist",
   description: "Portfolio of Lidya Abrha, a Visual artist.",
 };
 
