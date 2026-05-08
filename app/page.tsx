@@ -33,6 +33,8 @@ import artwork22 from "@/assets/art22.png";
 import artwork23 from "@/assets/art23.jpg";
 import artwork24 from "@/assets/art24.png";
 import artwork25 from "@/assets/art25.jpg";
+import artwork26 from "@/assets/art26.jpg";
+import artwork27 from "@/assets/art27.jpg";
 
 const artworks = [
   {
@@ -178,6 +180,18 @@ const artworks = [
     title: "Nature’s Splendor",
     description:
       "30x21",
+  },
+  {
+    image: artwork26,
+    title: "Gaze of Curiosity",
+    description:
+      "",
+  },
+  {
+    image: artwork27,
+    title: "Barbicue from the heart of south",
+    description:
+      "",
   }
 ];
 
