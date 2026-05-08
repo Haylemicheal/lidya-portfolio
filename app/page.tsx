@@ -189,7 +189,7 @@ const artworks = [
   },
   {
     image: artwork27,
-    title: "Barbicue from the heart of south",
+    title: "Barbecue from the heart of south",
     description:
       "",
   }
