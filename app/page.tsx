@@ -35,6 +35,7 @@ import artwork24 from "@/assets/art24.png";
 import artwork25 from "@/assets/art25.jpg";
 import artwork26 from "@/assets/art26.jpg";
 import artwork27 from "@/assets/art27.jpg";
+import artwork28 from "@/assets/art28.jpg";
 
 const artworks = [
   {
@@ -190,8 +191,12 @@ const artworks = [
   {
     image: artwork27,
     title: "Barbecue from the heart of south",
-    description:
-      "",
+    description:"",
+  },
+  {
+    image: artwork28,
+    title: "The Keeper of Customs",
+    description:"",
   }
 ];
 
