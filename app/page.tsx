@@ -36,6 +36,7 @@ import artwork25 from "@/assets/art25.jpg";
 import artwork26 from "@/assets/art26.jpg";
 import artwork27 from "@/assets/art27.jpg";
 import artwork28 from "@/assets/art28.jpg";
+import artwork29 from "@/assets/art29.jpg";
 
 const artworks = [
   {
@@ -196,6 +197,11 @@ const artworks = [
   {
     image: artwork28,
     title: "The Keeper of Customs",
+    description:"",
+  },
+  {
+    image: artwork29,
+    title: "Piassa",
     description:"",
   }
 ];
