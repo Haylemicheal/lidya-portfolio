@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import { requireAuth } from "@/lib/api-auth";
-import { uploadImage, USE_BLOB } from "@/lib/storage";
+import { canUseBlob, uploadImage } from "@/lib/storage";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 const MAX_SIZE = 10 * 1024 * 1024;
@@ -10,11 +10,11 @@ export async function POST(request: NextRequest) {
   const authError = await requireAuth();
   if (authError) return authError;
 
-  if (!USE_BLOB && process.env.VERCEL === "1") {
+  if (process.env.VERCEL === "1" && !canUseBlob()) {
     return NextResponse.json(
       {
         error:
-          "Image uploads require Vercel Blob. Add a Blob store in your Vercel project settings.",
+          "Blob storage is not connected. In Vercel: Storage → Blob → Connect to this project, then redeploy.",
       },
       { status: 503 }
     );
@@ -50,6 +50,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ url });
   } catch (error) {
     console.error("Upload failed:", error);
-    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+    const message =
+      error instanceof Error ? error.message : "Upload failed";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
