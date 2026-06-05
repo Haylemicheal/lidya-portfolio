@@ -1,4 +1,5 @@
 import path from "path";
+import { unstable_noStore as noStore } from "next/cache";
 import type { Artwork, ArtworksData, SiteContent } from "./types";
 import {
   deleteManagedImage,
@@ -13,6 +14,7 @@ const CONTENT_BLOB_PATH = "data/content.json";
 const ARTWORKS_BLOB_PATH = "data/artworks.json";
 
 export async function getSiteContent(): Promise<SiteContent> {
+  noStore();
   return readJsonFile<SiteContent>(CONTENT_FILE, CONTENT_BLOB_PATH);
 }
 
@@ -21,6 +23,7 @@ export async function saveSiteContent(content: SiteContent): Promise<void> {
 }
 
 export async function getArtworks(): Promise<Artwork[]> {
+  noStore();
   const data = await readJsonFile<ArtworksData>(ARTWORKS_FILE, ARTWORKS_BLOB_PATH);
   return data.artworks.sort((a, b) => a.order - b.order);
 }

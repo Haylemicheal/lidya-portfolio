@@ -2,6 +2,8 @@ import HomePage from "@/components/HomePage";
 import { getArtworks, getSiteContent } from "@/lib/content";
 import { resolveArtworksForDisplay, resolveContentForDisplay } from "@/lib/storage";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const [content, artworks] = await Promise.all([
     getSiteContent(),

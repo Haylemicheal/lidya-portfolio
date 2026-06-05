@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAuth } from "@/lib/api-auth";
 import {
   deleteUploadedImage,
@@ -58,6 +59,7 @@ export async function PUT(
     };
 
     await saveArtworks(artworks);
+    revalidatePath("/");
     return NextResponse.json({ artwork: artworks[index] });
   } catch {
     return NextResponse.json({ error: "Failed to update artwork" }, { status: 500 });
@@ -82,6 +84,7 @@ export async function DELETE(
 
     await deleteUploadedImage(artwork.image);
     await saveArtworks(artworks.filter((a) => a.id !== id));
+    revalidatePath("/");
 
     return NextResponse.json({ success: true });
   } catch {

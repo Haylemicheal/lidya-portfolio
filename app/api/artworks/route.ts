@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAuth } from "@/lib/api-auth";
 import {
   deleteUploadedImage,
@@ -47,6 +48,7 @@ export async function POST(request: NextRequest) {
 
     artworks.push(artwork);
     await saveArtworks(artworks);
+    revalidatePath("/");
 
     return NextResponse.json({ artwork }, { status: 201 });
   } catch {
@@ -64,6 +66,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
     }
     await saveArtworks(body.artworks);
+    revalidatePath("/");
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to reorder artworks" }, { status: 500 });
@@ -90,6 +93,7 @@ export async function DELETE(request: NextRequest) {
     await deleteUploadedImage(artwork.image);
     const filtered = artworks.filter((a) => a.id !== id);
     await saveArtworks(filtered);
+    revalidatePath("/");
 
     return NextResponse.json({ success: true });
   } catch {

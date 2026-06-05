@@ -1,4 +1,4 @@
-import { del, get, head, put, type PutCommandOptions } from "@vercel/blob";
+import { del, get, put, type PutCommandOptions } from "@vercel/blob";
 import { promises as fs } from "fs";
 import path from "path";
 import type { Artwork, SiteContent } from "./types";
@@ -93,16 +93,8 @@ export async function readJsonFile<T>(localPath: string, blobPath: string): Prom
         const raw = await new Response(result.stream).text();
         return JSON.parse(raw) as T;
       }
-    } catch {
-      try {
-        const info = await head(blobPath, getBlobCommandOptions());
-        const response = await fetch(info.url, { cache: "no-store" });
-        if (response.ok) {
-          return (await response.json()) as T;
-        }
-      } catch {
-        // Fall back to bundled local file on first deploy
-      }
+    } catch (error) {
+      console.error(`Blob read failed for ${blobPath}:`, error);
     }
   }
 
