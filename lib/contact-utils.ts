@@ -18,11 +18,87 @@ export function getInquiryRecipient(content?: SiteContent): string {
   return emailMethod.href.replace(/^mailto:/i, "").trim() || emailMethod.value.trim();
 }
 
-export function getContactFromAddress(): string {
-  const configured = process.env.CONTACT_FROM?.trim();
-  if (configured) return configured;
+const EMAIL_PATTERN = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
+const DEFAULT_FROM_EMAIL = "onboarding@resend.dev";
 
-  return "Lidya Portfolio <onboarding@resend.dev>";
+function decodeEnvValue(value: string): string {
+  return value
+    .trim()
+    .replace(/^['"]|['"]$/g, "")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\s+/g, " ");
+}
+
+export function extractEmail(value: string): string | null {
+  const decoded = decodeEnvValue(value);
+  if (!decoded) return null;
+
+  const namedMatch = decoded.match(/<([^>]+)>/);
+  if (namedMatch && EMAIL_PATTERN.test(namedMatch[1].trim())) {
+    return namedMatch[1].trim();
+  }
+
+  if (EMAIL_PATTERN.test(decoded)) {
+    return decoded;
+  }
+
+  const embeddedMatch = decoded.match(/([^\s@<>]+@[^\s@<>]+\.[^\s@<>]+)/);
+  if (embeddedMatch && EMAIL_PATTERN.test(embeddedMatch[1])) {
+    return embeddedMatch[1];
+  }
+
+  return null;
+}
+
+function sanitizeDisplayName(name: string): string {
+  return name.replace(/[<>]/g, "").trim();
+}
+
+export function normalizeFromAddress(raw: string): string | null {
+  const decoded = decodeEnvValue(raw);
+  if (!decoded) return null;
+
+  const email = extractEmail(decoded);
+  if (!email) return null;
+
+  const namedMatch = decoded.match(/^(.+?)\s*<[^>]+>$/);
+  if (namedMatch) {
+    const name = sanitizeDisplayName(namedMatch[1]);
+    if (name) return `${name} <${email}>`;
+  }
+
+  const looseMatch = decoded.match(/^(.+?)\s+[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/);
+  if (looseMatch) {
+    const name = sanitizeDisplayName(looseMatch[1]);
+    if (name) return `${name} <${email}>`;
+  }
+
+  return email;
+}
+
+export function getContactFromAddress(): string {
+  const fromEmail = process.env.CONTACT_FROM_EMAIL?.trim();
+  if (fromEmail) {
+    const email = extractEmail(fromEmail);
+    if (email) {
+      const name = sanitizeDisplayName(process.env.CONTACT_FROM_NAME?.trim() || "");
+      return name ? `${name} <${email}>` : email;
+    }
+  }
+
+  const configured = process.env.CONTACT_FROM?.trim();
+  if (configured) {
+    const normalized = normalizeFromAddress(configured);
+    if (normalized) return normalized;
+    console.warn("Ignoring invalid CONTACT_FROM value; falling back to default sender.");
+  }
+
+  return DEFAULT_FROM_EMAIL;
+}
+
+export function validateFromAddress(from: string): string | null {
+  return normalizeFromAddress(from) ?? extractEmail(from);
 }
 
 export function openMailtoInquiry(
@@ -77,8 +153,19 @@ export async function sendInquiryEmail(
     .map((line) => (line ? `<p>${line.replace(/</g, "&lt;")}</p>` : "<br />"))
     .join("");
 
+  const fromAddress = validateFromAddress(getContactFromAddress());
+  if (!fromAddress) {
+    return {
+      success: false,
+      error:
+        "Invalid sender configuration. Set CONTACT_FROM_EMAIL=onboarding@resend.dev on Vercel.",
+    };
+  }
+
+  console.info("Sending inquiry email via Resend", { from: fromAddress, to: recipient });
+
   const { error } = await resend.emails.send({
-    from: getContactFromAddress(),
+    from: fromAddress,
     to: [recipient],
     replyTo: inquiry.email.trim(),
     subject,
