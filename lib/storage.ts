@@ -1,22 +1,21 @@
-import { del, head, put, type PutCommandOptions } from "@vercel/blob";
+import { del, get, head, put, type PutCommandOptions } from "@vercel/blob";
 import { promises as fs } from "fs";
 import path from "path";
+import type { Artwork, SiteContent } from "./types";
+
+export function getBlobAccess(): "public" | "private" {
+  const env = process.env.BLOB_ACCESS?.toLowerCase();
+  if (env === "public" || env === "private") return env;
+  return "private";
+}
 
 /** True when Blob SDK can authenticate via token or connected store (OIDC on Vercel). */
 export function canUseBlob(): boolean {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 }
 
-export function isBlobUrl(url: string): boolean {
-  return url.includes("blob.vercel-storage.com");
-}
-
-export function isManagedUpload(url: string): boolean {
-  return url.startsWith("/uploads/") || isBlobUrl(url);
-}
-
-function getBlobOptions(): Pick<PutCommandOptions, "token" | "storeId"> {
-  const options: Pick<PutCommandOptions, "token" | "storeId"> = {};
+export function getBlobCommandOptions(): PutCommandOptions {
+  const options: PutCommandOptions = { access: getBlobAccess() };
   if (process.env.BLOB_READ_WRITE_TOKEN) {
     options.token = process.env.BLOB_READ_WRITE_TOKEN;
   }
@@ -26,16 +25,84 @@ function getBlobOptions(): Pick<PutCommandOptions, "token" | "storeId"> {
   return options;
 }
 
+export function isBlobUrl(url: string): boolean {
+  return url.includes("blob.vercel-storage.com");
+}
+
+export function isManagedUpload(url: string): boolean {
+  return url.startsWith("/uploads/") || url.startsWith("/api/blob/") || isBlobUrl(url);
+}
+
+export function blobPathnameFromReference(url: string): string | null {
+  if (url.startsWith("/api/blob/")) {
+    return url.slice("/api/blob/".length);
+  }
+  if (url.startsWith("uploads/")) {
+    return url;
+  }
+  if (!isBlobUrl(url)) return null;
+  try {
+    return new URL(url).pathname.slice(1);
+  } catch {
+    return null;
+  }
+}
+
+/** Public URL for displaying a blob-backed image (proxy when store is private). */
+export function resolveDisplayImageUrl(url: string): string {
+  if (!url) return url;
+  if (url.startsWith("/api/blob/") || url.startsWith("/media/") || url.startsWith("/uploads/")) {
+    return url;
+  }
+  if (getBlobAccess() === "public" && isBlobUrl(url)) {
+    return url;
+  }
+  const pathname = blobPathnameFromReference(url);
+  if (pathname) {
+    return `/api/blob/${pathname}`;
+  }
+  return url;
+}
+
+export function resolveArtworksForDisplay(artworks: Artwork[]): Artwork[] {
+  return artworks.map((artwork) => ({
+    ...artwork,
+    image: resolveDisplayImageUrl(artwork.image),
+  }));
+}
+
+export function resolveContentForDisplay(content: SiteContent): SiteContent {
+  return {
+    ...content,
+    hero: {
+      ...content.hero,
+      backgroundImage: resolveDisplayImageUrl(content.hero.backgroundImage),
+    },
+    about: {
+      ...content.about,
+      portraitImage: resolveDisplayImageUrl(content.about.portraitImage),
+    },
+  };
+}
+
 export async function readJsonFile<T>(localPath: string, blobPath: string): Promise<T> {
   if (canUseBlob()) {
     try {
-      const info = await head(blobPath, getBlobOptions());
-      const response = await fetch(info.url, { cache: "no-store" });
-      if (response.ok) {
-        return (await response.json()) as T;
+      const result = await get(blobPath, getBlobCommandOptions());
+      if (result) {
+        const raw = await new Response(result.stream).text();
+        return JSON.parse(raw) as T;
       }
     } catch {
-      // Fall back to bundled local file on first deploy
+      try {
+        const info = await head(blobPath, getBlobCommandOptions());
+        const response = await fetch(info.url, { cache: "no-store" });
+        if (response.ok) {
+          return (await response.json()) as T;
+        }
+      } catch {
+        // Fall back to bundled local file on first deploy
+      }
     }
   }
 
@@ -52,11 +119,10 @@ export async function writeJsonFile(
 
   if (canUseBlob()) {
     await put(blobPath, content, {
-      access: "public",
+      ...getBlobCommandOptions(),
       contentType: "application/json",
       addRandomSuffix: false,
       allowOverwrite: true,
-      ...getBlobOptions(),
     });
     return;
   }
@@ -72,12 +138,15 @@ export async function uploadImage(
 ): Promise<string> {
   if (canUseBlob()) {
     const blob = await put(`uploads/${fileName}`, buffer, {
-      access: "public",
+      ...getBlobCommandOptions(),
       contentType,
       addRandomSuffix: false,
       allowOverwrite: true,
-      ...getBlobOptions(),
     });
+
+    if (getBlobAccess() === "private") {
+      return `/api/blob/${blob.pathname}`;
+    }
     return blob.url;
   }
 
@@ -88,7 +157,17 @@ export async function uploadImage(
 }
 
 export async function deleteManagedImage(imagePath: string): Promise<void> {
-  const blobOptions = getBlobOptions();
+  const blobOptions = getBlobCommandOptions();
+  const pathname = blobPathnameFromReference(imagePath);
+
+  if (pathname && canUseBlob()) {
+    try {
+      await del(pathname, blobOptions);
+    } catch {
+      // Already removed
+    }
+    return;
+  }
 
   if (isBlobUrl(imagePath)) {
     try {
@@ -100,15 +179,6 @@ export async function deleteManagedImage(imagePath: string): Promise<void> {
   }
 
   if (!imagePath.startsWith("/uploads/")) return;
-
-  if (canUseBlob()) {
-    try {
-      await del(imagePath.replace(/^\//, ""), blobOptions);
-    } catch {
-      // Already removed
-    }
-    return;
-  }
 
   const filePath = path.join(process.cwd(), "public", imagePath);
   try {

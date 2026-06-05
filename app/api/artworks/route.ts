@@ -6,12 +6,13 @@ import {
   getArtworks,
   saveArtworks,
 } from "@/lib/content";
+import { resolveArtworksForDisplay } from "@/lib/storage";
 import type { Artwork } from "@/lib/types";
 
 export async function GET() {
   try {
     const artworks = await getArtworks();
-    return NextResponse.json({ artworks });
+    return NextResponse.json({ artworks: resolveArtworksForDisplay(artworks) });
   } catch {
     return NextResponse.json({ error: "Failed to load artworks" }, { status: 500 });
   }
