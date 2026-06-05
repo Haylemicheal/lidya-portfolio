@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { openMailtoInquiry } from "@/lib/contact-utils";
 import type { ContactInquiry } from "@/lib/types";
 
 interface InquiryFormProps {
@@ -26,13 +27,16 @@ export default function InquiryForm({ inquiryEmail }: InquiryFormProps) {
     subject: "commission",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "mailto" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setStatus("sending");
     setErrorMessage("");
+
+    const subjectLabel =
+      subjectOptions.find((option) => option.value === form.subject)?.label ?? "Inquiry";
 
     try {
       const res = await fetch("/api/contact", {
@@ -41,22 +45,31 @@ export default function InquiryForm({ inquiryEmail }: InquiryFormProps) {
         body: JSON.stringify(form),
       });
 
-      if (res.ok) {
-        setStatus("sent");
+      const data = (await res.json()) as {
+        error?: string;
+        fallback?: boolean;
+        recipient?: string;
+        subjectLabel?: string;
+        success?: boolean;
+      };
+
+      if (data.fallback) {
+        const recipient = data.recipient || inquiryEmail;
+        if (!recipient) {
+          setErrorMessage("No inquiry email configured. Please use the contact links below.");
+          setStatus("error");
+          return;
+        }
+
+        openMailtoInquiry(recipient, form, data.subjectLabel ?? subjectLabel);
+        setStatus("mailto");
         setForm({ name: "", email: "", subject: "commission", message: "" });
         return;
       }
 
-      const data = (await res.json()) as { error?: string; fallback?: boolean };
-      if (data.fallback && inquiryEmail) {
-        const subject = encodeURIComponent(
-          `[Portfolio] ${subjectOptions.find((o) => o.value === form.subject)?.label ?? "Inquiry"}`
-        );
-        const body = encodeURIComponent(
-          `Name: ${form.name}\nEmail: ${form.email}\nSubject: ${form.subject}\n\n${form.message}`
-        );
-        window.location.href = `mailto:${inquiryEmail}?subject=${subject}&body=${body}`;
+      if (res.ok && data.success) {
         setStatus("sent");
+        setForm({ name: "", email: "", subject: "commission", message: "" });
         return;
       }
 
@@ -64,12 +77,9 @@ export default function InquiryForm({ inquiryEmail }: InquiryFormProps) {
       setStatus("error");
     } catch {
       if (inquiryEmail) {
-        const subject = encodeURIComponent(`[Portfolio] Inquiry from ${form.name}`);
-        const body = encodeURIComponent(
-          `Name: ${form.name}\nEmail: ${form.email}\nSubject: ${form.subject}\n\n${form.message}`
-        );
-        window.location.href = `mailto:${inquiryEmail}?subject=${subject}&body=${body}`;
-        setStatus("sent");
+        openMailtoInquiry(inquiryEmail, form, subjectLabel);
+        setStatus("mailto");
+        setForm({ name: "", email: "", subject: "commission", message: "" });
       } else {
         setErrorMessage("Unable to send message. Please use the contact links below.");
         setStatus("error");
@@ -136,6 +146,11 @@ export default function InquiryForm({ inquiryEmail }: InquiryFormProps) {
       {status === "sent" && (
         <p className="text-sm text-accent font-medium">
           Thank you — your message has been sent.
+        </p>
+      )}
+      {status === "mailto" && (
+        <p className="text-sm text-accent font-medium">
+          Thank you — your email app should open with your message ready to send.
         </p>
       )}
       {status === "error" && errorMessage && (

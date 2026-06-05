@@ -2,6 +2,7 @@ import { del, get, put, type PutCommandOptions } from "@vercel/blob";
 import { promises as fs } from "fs";
 import path from "path";
 import type { Artwork, SiteContent } from "./types";
+import { getInquiryRecipient } from "./contact-utils";
 
 export function getBlobAccess(): "public" | "private" {
   const env = process.env.BLOB_ACCESS?.toLowerCase();
@@ -91,7 +92,7 @@ export function resolveContentForDisplay(content: SiteContent): SiteContent {
     exhibitions: content.exhibitions ?? { title: "Selected Shows", items: [] },
     contact: {
       ...content.contact,
-      inquiryEmail: content.contact.inquiryEmail ?? "",
+      inquiryEmail: getInquiryRecipient(content),
     },
   };
 }
