@@ -1,0 +1,52 @@
+{
+  "hero": {
+    "title": "Lidya Alemayehu",
+    "subtitle": "Visual Artist",
+    "backgroundImage": "/media/bg.jpg"
+  },
+  "about": {
+    "title": "About Me",
+    "paragraphs": [
+      "My name is Lidya Alemayehu, and I am 26 years old. I grew up in a small city in Northern Ethiopia a close, diverse community where stories were shared openly. From neighbors worrying about school fees, to young people planning uncertain journeys, to women speaking about the risks they took to begin again, I was surrounded by conversations about resilience, struggle, and hope.",
+      "I am a visual artist, and my work is deeply rooted in these experiences. I focus on themes related to women, social issues, and community building. With a background in sociology and social anthropology, and years of working in humanitarian settings, I bring a social perspective into every piece I create.",
+      "Art has been a part of my life since childhood. As a self-taught artist, I've continually developed my craft learning independently and collaborating with different artists to strengthen my skills and broaden my creative expression"
+    ],
+    "portraitImage": "/media/artist-2.jpg"
+  },
+  "portfolio": {
+    "title": "Selected Works",
+    "description": "A curated collection of recent paintings exploring themes of nature, abstraction, and the human experience."
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "I'd love to hear from you about commissions, exhibitions, or collaborations.",
+    "methods": [
+      {
+        "label": "Phone",
+        "value": "+251 947 610 363",
+        "href": "tel:+251947610363",
+        "type": "phone"
+      },
+      {
+        "label": "Email",
+        "value": "lidyaalemayehu25@gmail.com",
+        "href": "mailto:lidyaalemayehu25@gmail.com",
+        "type": "email"
+      },
+      {
+        "label": "Facebook",
+        "value": "Lidya Abrha",
+        "href": "https://www.facebook.com/lidya.abrha.39",
+        "type": "facebook",
+        "external": true
+      },
+      {
+        "label": "Instagram",
+        "value": "@lidya_abrha",
+        "href": "https://www.instagram.com/lidya_abrha",
+        "type": "instagram",
+        "external": true
+      }
+    ]
+  }
+}

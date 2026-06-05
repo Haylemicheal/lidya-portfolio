@@ -22,7 +22,8 @@ const ArtworkCard = ({ image, title, description }: ArtworkCardProps) => {
           <Image
             src={image}
             alt={title}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
@@ -55,11 +56,12 @@ const ArtworkCard = ({ image, title, description }: ArtworkCardProps) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="bg-white rounded-lg overflow-hidden shadow-2xl flex flex-col md:flex-row">
-              <div className="relative w-full md:w-1/2 bg-muted flex items-center justify-center min-h-[300px] md:min-h-[500px]">
+              <div className="relative w-full md:w-1/2 bg-muted min-h-[300px] md:min-h-[500px]">
                 <Image
                   src={image}
                   alt={title}
-                  className="w-full h-full object-contain p-4"
+                  fill
+                  className="object-contain p-4"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
