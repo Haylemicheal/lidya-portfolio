@@ -2,10 +2,17 @@
   "hero": {
     "title": "Lidya Alemayehu",
     "subtitle": "Visual Artist",
-    "backgroundImage": "/media/bg.jpg"
+    "backgroundImage": "/media/bg.jpg",
+    "featuredImages": [
+      "/media/art3.jpg",
+      "/media/art5.jpg",
+      "/media/art4.jpg",
+      "/media/art8.jpg"
+    ]
   },
   "about": {
     "title": "About Me",
+    "pullQuote": "Art has been a part of my life since childhood — a way to witness resilience, struggle, and hope in the communities that shaped me.",
     "paragraphs": [
       "My name is Lidya Alemayehu, and I am 26 years old. I grew up in a small city in Northern Ethiopia a close, diverse community where stories were shared openly. From neighbors worrying about school fees, to young people planning uncertain journeys, to women speaking about the risks they took to begin again, I was surrounded by conversations about resilience, struggle, and hope.",
       "I am a visual artist, and my work is deeply rooted in these experiences. I focus on themes related to women, social issues, and community building. With a background in sociology and social anthropology, and years of working in humanitarian settings, I bring a social perspective into every piece I create.",
@@ -15,11 +22,25 @@
   },
   "portfolio": {
     "title": "Selected Works",
-    "description": "A curated collection of recent paintings exploring themes of nature, abstraction, and the human experience."
+    "description": "Paintings exploring women, social issues, community, and the enduring search for hope — rooted in personal and collective experience."
+  },
+  "commissions": {
+    "title": "Work With Me",
+    "description": "I welcome conversations about custom commissions, exhibitions, and creative collaborations.",
+    "items": [
+      "Custom portrait and thematic commissions",
+      "Exhibition and gallery partnerships",
+      "Community and workshop collaborations"
+    ]
+  },
+  "exhibitions": {
+    "title": "Selected Shows",
+    "items": []
   },
   "contact": {
     "title": "Get In Touch",
     "description": "I'd love to hear from you about commissions, exhibitions, or collaborations.",
+    "inquiryEmail": "lidyaalemayehu25@gmail.com",
     "methods": [
       {
         "label": "Phone",

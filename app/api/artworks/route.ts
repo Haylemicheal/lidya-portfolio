@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { requireAuth } from "@/lib/api-auth";
+import { artworkSlug } from "@/lib/artwork-utils";
 import {
   deleteUploadedImage,
   generateId,
@@ -9,6 +10,11 @@ import {
 } from "@/lib/content";
 import { resolveArtworksForDisplay } from "@/lib/storage";
 import type { Artwork } from "@/lib/types";
+
+function revalidateArtworkPaths() {
+  revalidatePath("/");
+  revalidatePath("/work", "layout");
+}
 
 export async function GET() {
   try {
@@ -24,8 +30,9 @@ export async function POST(request: NextRequest) {
   if (authError) return authError;
 
   try {
-    const body = (await request.json()) as Omit<Artwork, "id" | "order"> & {
+    const body = (await request.json()) as Omit<Artwork, "id" | "order" | "slug"> & {
       order?: number;
+      slug?: string;
     };
 
     if (!body.title?.trim() || !body.image?.trim()) {
@@ -37,18 +44,25 @@ export async function POST(request: NextRequest) {
 
     const artworks = await getArtworks();
     const maxOrder = artworks.reduce((max, a) => Math.max(max, a.order), -1);
+    const id = generateId();
 
     const artwork: Artwork = {
-      id: generateId(),
+      id,
+      slug: body.slug?.trim() || artworkSlug(body.title.trim(), id),
       title: body.title.trim(),
+      medium: body.medium?.trim() ?? "",
+      dimensions: body.dimensions?.trim() ?? "",
+      year: body.year,
+      themes: body.themes ?? [],
       description: body.description?.trim() ?? "",
       image: body.image.trim(),
       order: body.order ?? maxOrder + 1,
+      featured: body.featured ?? false,
     };
 
     artworks.push(artwork);
     await saveArtworks(artworks);
-    revalidatePath("/");
+    revalidateArtworkPaths();
 
     return NextResponse.json({ artwork }, { status: 201 });
   } catch {
@@ -66,7 +80,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
     }
     await saveArtworks(body.artworks);
-    revalidatePath("/");
+    revalidateArtworkPaths();
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to reorder artworks" }, { status: 500 });
@@ -93,7 +107,7 @@ export async function DELETE(request: NextRequest) {
     await deleteUploadedImage(artwork.image);
     const filtered = artworks.filter((a) => a.id !== id);
     await saveArtworks(filtered);
-    revalidatePath("/");
+    revalidateArtworkPaths();
 
     return NextResponse.json({ success: true });
   } catch {

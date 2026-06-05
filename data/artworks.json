@@ -2,199 +2,418 @@
   "artworks": [
     {
       "id": "art-1",
+      "slug": "the-guardian",
       "title": "The Guardian",
-      "description": "40×50cm oil on canvas. A painting of a solitary figure embodying the role of a protector. The figure's body is represented by a striking vertical column of layered, angular red blocks, suggesting a powerful, almost armored structure. The limbs are long, thin, and dark, giving the form an elegant yet imposing height. The head is a distinct, blue mask-like oval, marked with abstract white and black chevrons that point upward, lending it an air of ritual or authority. The Guardian stands rigidly, holding a long, dark staff that reinforces its role as a watchman or sentry. The figure is set against a background that appears like a dense, abstract forest or a fortified wall, composed of rhythmic horizontal stripes of deep green, overlaid with vertical dashes of yellow and lighter green, creating a textured, geometric pattern that seems to enclose and frame the Guardian, emphasizing its solitary duty within this space.",
+      "medium": "Oil on canvas",
+      "dimensions": "40 × 50 cm",
+      "themes": [
+        "hope",
+        "portraits",
+        "abstract"
+      ],
+      "description": "A painting of a solitary figure embodying the role of a protector. The figure's body is represented by a striking vertical column of layered, angular red blocks, suggesting a powerful, almost armored structure. The limbs are long, thin, and dark, giving the form an elegant yet imposing height. The head is a distinct, blue mask-like oval, marked with abstract white and black chevrons that point upward, lending it an air of ritual or authority. The Guardian stands rigidly, holding a long, dark staff that reinforces its role as a watchman or sentry. The figure is set against a background that appears like a dense, abstract forest or a fortified wall, composed of rhythmic horizontal stripes of deep green, overlaid with vertical dashes of yellow and lighter green, creating a textured, geometric pattern that seems to enclose and frame the Guardian, emphasizing its solitary duty within this space.",
       "image": "/media/art1.jpg",
-      "order": 0
+      "order": 0,
+      "featured": true
     },
     {
       "id": "art-2",
+      "slug": "morning-melody",
       "title": "Morning Melody",
-      "description": "20×30cm acrylic on canvas. This small, intimate painting captures the harmonious start to the day through the ritual of coffee making. The central image is a silver Moka pot, rendered with dynamic, visible brushstrokes, positioned over an intense bed of orange and red flames. The atmosphere is defined by the swirling steam, depicted in pale white and gray, which rises rapidly above the pot. This steam acts as the visual carrier for the central symbolic element: musical notes scattered throughout the air. The title highlights how the sounds associated with the pot—the gentle hiss, the perking of the water—are viewed not as mere noise, but as a deliberate, soothing tune accompanying the warming process. The background is a rich, abstract tapestry of deep, interwoven colors creating a cozy yet dramatic setting.",
+      "medium": "Acrylic on canvas",
+      "dimensions": "20 × 30 cm",
+      "themes": [
+        "hope",
+        "culture",
+        "nature",
+        "abstract"
+      ],
+      "description": "This small, intimate painting captures the harmonious start to the day through the ritual of coffee making. The central image is a silver Moka pot, rendered with dynamic, visible brushstrokes, positioned over an intense bed of orange and red flames. The atmosphere is defined by the swirling steam, depicted in pale white and gray, which rises rapidly above the pot. This steam acts as the visual carrier for the central symbolic element: musical notes scattered throughout the air. The title highlights how the sounds associated with the pot—the gentle hiss, the perking of the water—are viewed not as mere noise, but as a deliberate, soothing tune accompanying the warming process. The background is a rich, abstract tapestry of deep, interwoven colors creating a cozy yet dramatic setting.",
       "image": "/media/art2.jpg",
-      "order": 1
+      "order": 1,
+      "featured": true
     },
     {
       "id": "art-3",
+      "slug": "the-call-of-light",
       "title": "The Call of Light",
-      "description": "1×1m oil on canvas. The artwork utilizes the fundamentals of painting—line, color, shape, form, and light and shadow—as a language to convey its essential idea and emotion. The main character is depicted with a strong vertical line form, raising her hands upwards, with a light glow on her face, and dressed in yellow. This imagery represents her readiness to permanently fight her challenges, her victory, her continuous struggle towards the light, and her attainment of complete hope. The challenges she faces are shown with weak, curved lines, indicating they are not greater than her strength. The painting also includes others suffering in deep sorrow and mental trauma, represented by pale blue colors, who are focusing on her path—the exit to the light—demonstrating their transition toward recovery and mental freedom.",
+      "medium": "Oil on canvas",
+      "dimensions": "1 × 1 m",
+      "themes": [
+        "hope"
+      ],
+      "description": "The artwork utilizes the fundamentals of painting—line, color, shape, form, and light and shadow—as a language to convey its essential idea and emotion. The main character is depicted with a strong vertical line form, raising her hands upwards, with a light glow on her face, and dressed in yellow. This imagery represents her readiness to permanently fight her challenges, her victory, her continuous struggle towards the light, and her attainment of complete hope. The challenges she faces are shown with weak, curved lines, indicating they are not greater than her strength. The painting also includes others suffering in deep sorrow and mental trauma, represented by pale blue colors, who are focusing on her path—the exit to the light—demonstrating their transition toward recovery and mental freedom.",
       "image": "/media/art3.jpg",
-      "order": 2
+      "order": 2,
+      "featured": true
     },
     {
       "id": "art-4",
+      "slug": "sisterhood",
       "title": "Sisterhood",
-      "description": "90×45cm oil on canvas. The focus is entirely on the gestures of sisterhood and gentle connection: the central yellow-clad figure tenderly touches the face of the pink-clad figure, suggesting a moment of shared secret, comfort, or deep understanding. In powerful contrast to this warm, internal moment, the background is a dark silhouette of a dense city skyline. This contrast emphasizes the idea that even while surrounded by the impersonal demands of the urban world, these women create their own sanctuary of trust and community. The painting celebrates the quiet power and enduring bonds found in female companionship.",
+      "medium": "Oil on canvas",
+      "dimensions": "90 × 45 cm",
+      "themes": [
+        "women",
+        "community"
+      ],
+      "description": "The focus is entirely on the gestures of sisterhood and gentle connection: the central yellow-clad figure tenderly touches the face of the pink-clad figure, suggesting a moment of shared secret, comfort, or deep understanding. In powerful contrast to this warm, internal moment, the background is a dark silhouette of a dense city skyline. This contrast emphasizes the idea that even while surrounded by the impersonal demands of the urban world, these women create their own sanctuary of trust and community. The painting celebrates the quiet power and enduring bonds found in female companionship.",
       "image": "/media/art4.jpg",
-      "order": 3
+      "order": 3,
+      "featured": true
     },
     {
       "id": "art-5",
+      "slug": "the-enduring-flicker-of-hope",
       "title": "The Enduring Flicker of Hope",
-      "description": "40×60cm oil on canvas. This striking portrait powerfully conveys a message of enduring hope and inner strength. A woman with deep, expressive features and dark skin is depicted in a close-up, her gaze direct and unwavering, holding a sense of quiet determination. She is elegantly draped in a flowing white fabric, possibly a traditional shawl or head covering, which creates graceful folds that contrast with the warmth of the central light source. The painting's focal point is the thin, braided candle she holds. Its flame casts an incredibly strong, almost divine orange-yellow glow that radiates outwards, creating a halo of light that illuminates her face and the surrounding space. This intense light symbolizes not just a physical flame, but a metaphorical 'flicker of hope' that persists even in the surrounding deep, mysterious brown shadows of the background.",
+      "medium": "Oil on canvas",
+      "dimensions": "40 × 60 cm",
+      "themes": [
+        "hope",
+        "portraits",
+        "culture"
+      ],
+      "description": "This striking portrait powerfully conveys a message of enduring hope and inner strength. A woman with deep, expressive features and dark skin is depicted in a close-up, her gaze direct and unwavering, holding a sense of quiet determination. She is elegantly draped in a flowing white fabric, possibly a traditional shawl or head covering, which creates graceful folds that contrast with the warmth of the central light source. The painting's focal point is the thin, braided candle she holds. Its flame casts an incredibly strong, almost divine orange-yellow glow that radiates outwards, creating a halo of light that illuminates her face and the surrounding space. This intense light symbolizes not just a physical flame, but a metaphorical 'flicker of hope' that persists even in the surrounding deep, mysterious brown shadows of the background.",
       "image": "/media/art5.jpg",
-      "order": 4
+      "order": 4,
+      "featured": false
     },
     {
       "id": "art-6",
+      "slug": "the-nymphs-command-of-the-cascade",
       "title": "The Nymph's Command of the Cascade",
-      "description": "50×70cm oil on canvas. This vibrant, green-saturated painting portrays a woman as an elemental figure, commanding the forces of nature. Dressed in a flowing, simple white gown, her dark hair billows around her as she stands in a lush garden filled with rich foliage and bright yellow flowers in the foreground. The core of the image is the dazzling stream of water she directs. Instead of passively receiving the water, she actively controls it with her hands, which are adorned with striking gold bangles. The water is painted with brilliant white and light blue-green tones, making it appear crystalline and forceful—a controlled 'cascade.' This visual mastery suggests her role as a 'Nymph' or spirit of the place, where her physical presence and inner power allow her to channel and command the life-giving essence of the environment.",
+      "medium": "Oil on canvas",
+      "dimensions": "50 × 70 cm",
+      "themes": [
+        "women",
+        "hope",
+        "nature"
+      ],
+      "description": "This vibrant, green-saturated painting portrays a woman as an elemental figure, commanding the forces of nature. Dressed in a flowing, simple white gown, her dark hair billows around her as she stands in a lush garden filled with rich foliage and bright yellow flowers in the foreground. The core of the image is the dazzling stream of water she directs. Instead of passively receiving the water, she actively controls it with her hands, which are adorned with striking gold bangles. The water is painted with brilliant white and light blue-green tones, making it appear crystalline and forceful—a controlled 'cascade.' This visual mastery suggests her role as a 'Nymph' or spirit of the place, where her physical presence and inner power allow her to channel and command the life-giving essence of the environment.",
       "image": "/media/art6.jpg",
-      "order": 5
+      "order": 5,
+      "featured": false
     },
     {
       "id": "art-7",
+      "slug": "loved-sinner",
       "title": "Loved Sinner",
-      "description": "30×40cm oil on canvas. This painting reimagines a figure's journey from earthly transgression to divine grace. A solitary figure, cloaked in vibrant orange and blue garments, walks away from the viewer, moving towards an intensely bright, almost ethereal blue light that emanates from beyond a sturdy, arching gateway of textured brown brick. Atop the figure's head rests a woven basket, which in this narrative, symbolically carries the 'fruits of her sins'—a direct echo of the forbidden fruit of Eve. These burdens are carried with her, a visible testament to past failings. However, the powerful light ahead, the clear path through the archway, and the very title 'Loved Sinner' speak to a profound moment of divine forgiveness and acceptance. The journey through the arch is her 'passage into heaven,' leaving the earthly constraints of sin behind as she steps into the glorious, forgiving light.",
+      "medium": "Oil on canvas",
+      "dimensions": "30 × 40 cm",
+      "themes": [
+        "hope"
+      ],
+      "description": "This painting reimagines a figure's journey from earthly transgression to divine grace. A solitary figure, cloaked in vibrant orange and blue garments, walks away from the viewer, moving towards an intensely bright, almost ethereal blue light that emanates from beyond a sturdy, arching gateway of textured brown brick. Atop the figure's head rests a woven basket, which in this narrative, symbolically carries the 'fruits of her sins'—a direct echo of the forbidden fruit of Eve. These burdens are carried with her, a visible testament to past failings. However, the powerful light ahead, the clear path through the archway, and the very title 'Loved Sinner' speak to a profound moment of divine forgiveness and acceptance. The journey through the arch is her 'passage into heaven,' leaving the earthly constraints of sin behind as she steps into the glorious, forgiving light.",
       "image": "/media/art7.jpg",
-      "order": 6
+      "order": 6,
+      "featured": false
     },
     {
       "id": "art-8",
+      "slug": "gravitys-quiet-rebellion",
       "title": "Gravity's Quiet Rebellion",
-      "description": "60×90cm oil on canvas. This striking vertical canvas is a poetic meditation on the theme of freedom and defying limits. The painting features three Black ballerinas, each a testament to grace and resilience, set against a dramatically contrasting abstract background of fiery yellow-orange descending into cool, blue. The title speaks about the figures in flight. Two dancers are captured in poses that completely disregard weight and earthbound rules, symbolizing a total physical and spiritual liberation. They represent the moment where inner strength allows one to transcend the expected constraints of the world. The third dancer, seated in a moment of repose on the blue foreground, embodies the grounded focus and powerful self-possession required before launching into such freedom. The artwork is a unique celebration of the quiet, beautiful defiance inherent in mastering one's form and, through that mastery, achieving complete, unrestricted freedom.",
+      "medium": "Oil on canvas",
+      "dimensions": "60 × 90 cm",
+      "themes": [
+        "women",
+        "hope",
+        "abstract"
+      ],
+      "description": "This striking vertical canvas is a poetic meditation on the theme of freedom and defying limits. The painting features three Black ballerinas, each a testament to grace and resilience, set against a dramatically contrasting abstract background of fiery yellow-orange descending into cool, blue. The title speaks about the figures in flight. Two dancers are captured in poses that completely disregard weight and earthbound rules, symbolizing a total physical and spiritual liberation. They represent the moment where inner strength allows one to transcend the expected constraints of the world. The third dancer, seated in a moment of repose on the blue foreground, embodies the grounded focus and powerful self-possession required before launching into such freedom. The artwork is a unique celebration of the quiet, beautiful defiance inherent in mastering one's form and, through that mastery, achieving complete, unrestricted freedom.",
       "image": "/media/art8.jpg",
-      "order": 7
+      "order": 7,
+      "featured": false
     },
     {
       "id": "art-9",
+      "slug": "eternal-clasp",
       "title": "Eternal Clasp",
-      "description": "50×60cm acrylic on canvas. This painting is a close-up, intensely focused study on the theme of enduring commitment and union. It features two hands firmly clasped, symbolizing a covenant or unbreakable bond. The title, 'Eternal Clasp,' speaks directly to the promise of permanence suggested by the engagement ring visible on the hand with the long, elegantly manicured nails. This hand, with its pearl bracelet and delicate appearance, contrasts powerfully with the more rugged, broader hand that holds it, highlighting the complementary nature of the two individuals. The hands themselves are rendered in warm, earthly tones, giving them a lifelike intensity. They emerge from and are framed by a rich, abstract background of heavily textured brushstrokes in deep purples and moody browns. This dense, expressive backdrop ensures that the focus remains entirely on the interlocking hands, transforming the simple gesture into a powerful, timeless symbol of love, support, and lasting commitment.",
+      "medium": "Acrylic on canvas",
+      "dimensions": "50 × 60 cm",
+      "themes": [
+        "hope",
+        "community",
+        "portraits",
+        "nature",
+        "abstract"
+      ],
+      "description": "This painting is a close-up, intensely focused study on the theme of enduring commitment and union. It features two hands firmly clasped, symbolizing a covenant or unbreakable bond. The title, 'Eternal Clasp,' speaks directly to the promise of permanence suggested by the engagement ring visible on the hand with the long, elegantly manicured nails. This hand, with its pearl bracelet and delicate appearance, contrasts powerfully with the more rugged, broader hand that holds it, highlighting the complementary nature of the two individuals. The hands themselves are rendered in warm, earthly tones, giving them a lifelike intensity. They emerge from and are framed by a rich, abstract background of heavily textured brushstrokes in deep purples and moody browns. This dense, expressive backdrop ensures that the focus remains entirely on the interlocking hands, transforming the simple gesture into a powerful, timeless symbol of love, support, and lasting commitment.",
       "image": "/media/art9.jpg",
-      "order": 8
+      "order": 8,
+      "featured": false
     },
     {
       "id": "art-10",
+      "slug": "shadowed-intensity",
       "title": "Shadowed Intensity",
-      "description": "50×50cm oil on canvas. A powerful exploration of contrast and emotion through the interplay of light and shadow.",
+      "medium": "Oil on canvas",
+      "dimensions": "50 × 50 cm",
+      "themes": [
+        "hope",
+        "portraits"
+      ],
+      "description": "A powerful exploration of contrast and emotion through the interplay of light and shadow.",
       "image": "/media/art10.jpg",
-      "order": 9
+      "order": 9,
+      "featured": false
     },
     {
       "id": "art-11",
+      "slug": "true-ethiopian-color",
       "title": "True Ethiopian Color",
-      "description": "30×30cm oil on canvas. This small, square painting is a vibrant and direct celebration of Ethiopian culture, captured through iconic objects and a bold, declarative color scheme. The Jebena (the traditional Ethiopian coffee pot), depicted in a deep, commanding black. This essential vessel of the coffee ceremony (Buna tetu) is flanked by three small, white coffee cups (Finjal), ready for the communal serving. The composition utilizes simple, dark blue, stylized motifs reminiscent of traditional patterns and decorative arts scattered across the bright field. The painting strips the cultural ritual down to its boldest, most recognizable elements. It is an abstract, folk-art tribute where the powerful yellow, black, and white hues are used to express the essence and identity of a cherished national tradition.",
+      "medium": "Oil on canvas",
+      "dimensions": "30 × 30 cm",
+      "themes": [
+        "culture",
+        "abstract"
+      ],
+      "description": "This small, square painting is a vibrant and direct celebration of Ethiopian culture, captured through iconic objects and a bold, declarative color scheme. The Jebena (the traditional Ethiopian coffee pot), depicted in a deep, commanding black. This essential vessel of the coffee ceremony (Buna tetu) is flanked by three small, white coffee cups (Finjal), ready for the communal serving. The composition utilizes simple, dark blue, stylized motifs reminiscent of traditional patterns and decorative arts scattered across the bright field. The painting strips the cultural ritual down to its boldest, most recognizable elements. It is an abstract, folk-art tribute where the powerful yellow, black, and white hues are used to express the essence and identity of a cherished national tradition.",
       "image": "/media/art11.jpg",
-      "order": 10
+      "order": 10,
+      "featured": false
     },
     {
       "id": "art-12",
+      "slug": "keeper-of-the-word",
       "title": "Keeper of the Word",
-      "description": "40×50cm oil on canvas. This striking portrait captures the solemn dignity and spiritual authority of a traditional Ethiopian priest. The figure is framed by an intense, overwhelming darkness, from which he emerges holding a large, prominent white Ethiopian hand cross. The composition's tension is generated by the presence of a powerful, luminous yellow-white beam of light that slashes across the dark background from the upper right. This light does not simply illuminate the priest; it seems to emanate from a divine source and falls upon him and the cross, sanctifying his presence. The priest, wearing the customary white robes, turban, and a colorful, heavy cape (green, red, and blue), looks directly at the viewer with a gaze that is both steady and mysterious. He stands as a 'Keeper,' holding the light and the symbol of faith against the deep shadows of the world, serving as a beacon of enduring spiritual presence.",
+      "medium": "Oil on canvas",
+      "dimensions": "40 × 50 cm",
+      "themes": [
+        "hope",
+        "portraits",
+        "culture"
+      ],
+      "description": "This striking portrait captures the solemn dignity and spiritual authority of a traditional Ethiopian priest. The figure is framed by an intense, overwhelming darkness, from which he emerges holding a large, prominent white Ethiopian hand cross. The composition's tension is generated by the presence of a powerful, luminous yellow-white beam of light that slashes across the dark background from the upper right. This light does not simply illuminate the priest; it seems to emanate from a divine source and falls upon him and the cross, sanctifying his presence. The priest, wearing the customary white robes, turban, and a colorful, heavy cape (green, red, and blue), looks directly at the viewer with a gaze that is both steady and mysterious. He stands as a 'Keeper,' holding the light and the symbol of faith against the deep shadows of the world, serving as a beacon of enduring spiritual presence.",
       "image": "/media/art12.jpg",
-      "order": 11
+      "order": 11,
+      "featured": false
     },
     {
       "id": "art-13",
+      "slug": "the-scream",
       "title": "The Scream",
+      "medium": "",
+      "dimensions": "",
+      "themes": [
+        "portraits",
+        "abstract"
+      ],
       "description": "An impressionist/Expressionist homage to Edvard Munch's iconic masterpiece, reinterpreting the emotional intensity and psychological depth of the original through a contemporary lens.",
       "image": "/media/art13.jpg",
-      "order": 12
+      "order": 12,
+      "featured": false
     },
     {
       "id": "art-14",
+      "slug": "starry-night",
       "title": "Starry Night",
+      "medium": "",
+      "dimensions": "",
+      "themes": [
+        "abstract"
+      ],
       "description": "An impressionist homage to Vincent van Gogh's celebrated work, capturing the swirling night sky and the emotional resonance of the original through expressive brushwork and vibrant color.",
       "image": "/media/art14.jpg",
-      "order": 13
+      "order": 13,
+      "featured": false
     },
     {
       "id": "art-15",
+      "slug": "the-kiss",
       "title": "The Kiss",
+      "medium": "",
+      "dimensions": "",
+      "themes": [
+        "abstract"
+      ],
       "description": "Artistic style is symbolism ( after Gustav Klimt )",
       "image": "/media/art15.jpg",
-      "order": 14
+      "order": 14,
+      "featured": false
     },
     {
       "id": "art-16",
+      "slug": "the-quiet-morning",
       "title": "The Quiet Morning",
+      "medium": "",
+      "dimensions": "30 × 21",
+      "themes": [
+        "community"
+      ],
       "description": "30x21",
       "image": "/media/art16.png",
-      "order": 15
+      "order": 15,
+      "featured": false
     },
     {
       "id": "art-17",
+      "slug": "sisters-in-ochre",
       "title": "Sisters in Ochre",
+      "medium": "",
+      "dimensions": "50 × 40",
+      "themes": [
+        "women"
+      ],
       "description": "50x40",
       "image": "/media/art17.jpg",
-      "order": 16
+      "order": 16,
+      "featured": false
     },
     {
       "id": "art-18",
+      "slug": "emerald-gaze",
       "title": "Emerald Gaze",
+      "medium": "",
+      "dimensions": "30 × 21",
+      "themes": [
+        "portraits"
+      ],
       "description": "30x21",
       "image": "/media/art18.jpg",
-      "order": 17
+      "order": 17,
+      "featured": false
     },
     {
       "id": "art-19",
+      "slug": "patterns-of-grace",
       "title": "Patterns of Grace",
+      "medium": "",
+      "dimensions": "40 × 50",
+      "themes": [
+        "hope"
+      ],
       "description": "40x50",
       "image": "/media/art19.jpg",
-      "order": 18
+      "order": 18,
+      "featured": false
     },
     {
       "id": "art-25",
+      "slug": "the-fragrance-of-memory",
       "title": "The Fragrance of Memory ",
+      "medium": "",
+      "dimensions": "40 × 50",
+      "themes": [
+        "community"
+      ],
       "description": "40x50",
       "image": "/media/art25.jpg",
-      "order": 19
+      "order": 19,
+      "featured": false
     },
     {
       "id": "art-20",
+      "slug": "the-evening-toast",
       "title": "The Evening Toast",
+      "medium": "",
+      "dimensions": "40 × 50",
+      "themes": [
+        "community"
+      ],
       "description": "40x50",
       "image": "/media/art20.jpg",
-      "order": 20
+      "order": 20,
+      "featured": false
     },
     {
       "id": "art-22",
+      "slug": "the-keeper-of-tradition",
       "title": "The Keeper of Tradition",
+      "medium": "",
+      "dimensions": "30 × 21",
+      "themes": [
+        "portraits",
+        "culture"
+      ],
       "description": "30x21",
       "image": "/media/art22.png",
-      "order": 21
+      "order": 21,
+      "featured": false
     },
     {
       "id": "art-23",
+      "slug": "the-essence-of-coffee",
       "title": "The Essence of coffee",
+      "medium": "",
+      "dimensions": "40 × 50",
+      "themes": [
+        "culture"
+      ],
       "description": "40x50",
       "image": "/media/art23.jpg",
-      "order": 22
+      "order": 22,
+      "featured": false
     },
     {
       "id": "art-24",
+      "slug": "natures-splendor",
       "title": "Nature's Splendor",
+      "medium": "",
+      "dimensions": "30 × 21",
+      "themes": [
+        "nature"
+      ],
       "description": "30x21",
       "image": "/media/art24.png",
-      "order": 23
+      "order": 23,
+      "featured": false
     },
     {
       "id": "art-26",
+      "slug": "gaze-of-curiosity",
       "title": "Gaze of Curiosity",
+      "medium": "",
+      "dimensions": "",
+      "themes": [
+        "portraits"
+      ],
       "description": "",
       "image": "/media/art26.jpg",
-      "order": 24
+      "order": 24,
+      "featured": false
     },
     {
       "id": "art-27",
+      "slug": "barbecue-from-the-heart-of-south",
       "title": "Barbecue from the heart of south",
+      "medium": "",
+      "dimensions": "",
+      "themes": [
+        "community"
+      ],
       "description": "",
       "image": "/media/art27.jpg",
-      "order": 25
+      "order": 25,
+      "featured": false
     },
     {
       "id": "art-28",
+      "slug": "the-keeper-of-customs",
       "title": "The Keeper of Customs",
+      "medium": "",
+      "dimensions": "",
+      "themes": [
+        "portraits",
+        "culture"
+      ],
       "description": "",
       "image": "/media/art28.jpg",
-      "order": 26
+      "order": 26,
+      "featured": false
     },
     {
       "id": "art-29",
+      "slug": "piassa",
       "title": "Piassa",
+      "medium": "",
+      "dimensions": "",
+      "themes": [
+        "culture"
+      ],
       "description": "",
       "image": "/media/art29.jpg",
-      "order": 27
+      "order": 27,
+      "featured": false
     }
   ]
 }

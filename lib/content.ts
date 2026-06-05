@@ -1,5 +1,6 @@
 import path from "path";
 import { unstable_noStore as noStore } from "next/cache";
+import { normalizeArtwork } from "./artwork-utils";
 import type { Artwork, ArtworksData, SiteContent } from "./types";
 import {
   deleteManagedImage,
@@ -25,7 +26,14 @@ export async function saveSiteContent(content: SiteContent): Promise<void> {
 export async function getArtworks(): Promise<Artwork[]> {
   noStore();
   const data = await readJsonFile<ArtworksData>(ARTWORKS_FILE, ARTWORKS_BLOB_PATH);
-  return data.artworks.sort((a, b) => a.order - b.order);
+  return data.artworks
+    .map((artwork, index) => normalizeArtwork(artwork as unknown as Record<string, unknown>, index))
+    .sort((a, b) => a.order - b.order);
+}
+
+export async function getArtworkBySlug(slug: string): Promise<Artwork | undefined> {
+  const artworks = await getArtworks();
+  return artworks.find((a) => a.slug === slug);
 }
 
 export async function saveArtworks(artworks: Artwork[]): Promise<void> {

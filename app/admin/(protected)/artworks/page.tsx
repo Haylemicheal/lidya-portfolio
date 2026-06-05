@@ -7,8 +7,21 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import ImageUpload from "@/components/admin/ImageUpload";
-import type { Artwork } from "@/lib/types";
+import { ARTWORK_THEMES, type Artwork, type ArtworkTheme } from "@/lib/types";
+import { themeLabel } from "@/lib/artwork-utils";
 import { ChevronDown, ChevronUp, Pencil, Plus, Trash2, X } from "lucide-react";
+
+const emptyForm = {
+  title: "",
+  slug: "",
+  medium: "",
+  dimensions: "",
+  year: "",
+  themes: [] as ArtworkTheme[],
+  description: "",
+  image: "",
+  featured: false,
+};
 
 export default function AdminArtworksPage() {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
@@ -17,7 +30,7 @@ export default function AdminArtworksPage() {
   const [message, setMessage] = useState("");
   const [editing, setEditing] = useState<Artwork | null>(null);
   const [isCreating, setIsCreating] = useState(false);
-  const [form, setForm] = useState({ title: "", description: "", image: "" });
+  const [form, setForm] = useState(emptyForm);
 
   const loadArtworks = useCallback(async () => {
     const res = await fetch("/api/artworks");
@@ -36,7 +49,7 @@ export default function AdminArtworksPage() {
   };
 
   const openCreate = () => {
-    setForm({ title: "", description: "", image: "" });
+    setForm(emptyForm);
     setIsCreating(true);
     setEditing(null);
   };
@@ -44,8 +57,14 @@ export default function AdminArtworksPage() {
   const openEdit = (artwork: Artwork) => {
     setForm({
       title: artwork.title,
+      slug: artwork.slug,
+      medium: artwork.medium,
+      dimensions: artwork.dimensions,
+      year: artwork.year?.toString() ?? "",
+      themes: artwork.themes,
       description: artwork.description,
       image: artwork.image,
+      featured: artwork.featured ?? false,
     });
     setEditing(artwork);
     setIsCreating(false);
@@ -54,7 +73,16 @@ export default function AdminArtworksPage() {
   const closeForm = () => {
     setEditing(null);
     setIsCreating(false);
-    setForm({ title: "", description: "", image: "" });
+    setForm(emptyForm);
+  };
+
+  const toggleTheme = (theme: ArtworkTheme) => {
+    setForm((current) => ({
+      ...current,
+      themes: current.themes.includes(theme)
+        ? current.themes.filter((t) => t !== theme)
+        : [...current.themes, theme],
+    }));
   };
 
   const handleSave = async () => {
@@ -63,13 +91,25 @@ export default function AdminArtworksPage() {
       return;
     }
 
+    const payload = {
+      title: form.title,
+      slug: form.slug,
+      medium: form.medium,
+      dimensions: form.dimensions,
+      year: form.year ? parseInt(form.year, 10) : undefined,
+      themes: form.themes,
+      description: form.description,
+      image: form.image,
+      featured: form.featured,
+    };
+
     setSaving(true);
     try {
       if (isCreating) {
         const res = await fetch("/api/artworks", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+          body: JSON.stringify(payload),
         });
         if (!res.ok) throw new Error("Failed to create artwork");
         showMessage("Artwork created");
@@ -77,7 +117,7 @@ export default function AdminArtworksPage() {
         const res = await fetch(`/api/artworks/${editing.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+          body: JSON.stringify(payload),
         });
         if (!res.ok) throw new Error("Failed to update artwork");
         showMessage("Artwork updated");
@@ -166,12 +206,70 @@ export default function AdminArtworksPage() {
                 />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="slug">URL slug</Label>
+                <Input
+                  id="slug"
+                  value={form.slug}
+                  onChange={(e) => setForm({ ...form, slug: e.target.value })}
+                  placeholder="the-guardian"
+                />
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="medium">Medium</Label>
+                  <Input
+                    id="medium"
+                    value={form.medium}
+                    onChange={(e) => setForm({ ...form, medium: e.target.value })}
+                    placeholder="Oil on canvas"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="dimensions">Dimensions</Label>
+                  <Input
+                    id="dimensions"
+                    value={form.dimensions}
+                    onChange={(e) => setForm({ ...form, dimensions: e.target.value })}
+                    placeholder="40 × 50 cm"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="year">Year (optional)</Label>
+                <Input
+                  id="year"
+                  type="number"
+                  value={form.year}
+                  onChange={(e) => setForm({ ...form, year: e.target.value })}
+                  placeholder="2024"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Themes</Label>
+                <div className="flex flex-wrap gap-2">
+                  {ARTWORK_THEMES.map((theme) => (
+                    <button
+                      key={theme}
+                      type="button"
+                      onClick={() => toggleTheme(theme)}
+                      className={`px-3 py-1 rounded-full text-xs border transition-colors ${
+                        form.themes.includes(theme)
+                          ? "bg-foreground text-background border-foreground"
+                          : "border-border text-muted-foreground hover:border-foreground/30"
+                      }`}
+                    >
+                      {themeLabel(theme)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
-                  placeholder="Size, medium, and description..."
+                  placeholder="Artist statement about this piece..."
                   rows={5}
                 />
               </div>
@@ -179,6 +277,15 @@ export default function AdminArtworksPage() {
                 value={form.image}
                 onChange={(url) => setForm({ ...form, image: url })}
               />
+              <label className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={form.featured}
+                  onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+                  className="rounded"
+                />
+                Feature in hero rotation
+              </label>
               <div className="flex gap-3 pt-2">
                 <Button onClick={handleSave} disabled={saving} className="flex-1">
                   {saving ? "Saving..." : isCreating ? "Create" : "Save Changes"}
@@ -210,7 +317,8 @@ export default function AdminArtworksPage() {
             <div className="flex-1 min-w-0">
               <h3 className="font-medium truncate">{artwork.title}</h3>
               <p className="text-sm text-muted-foreground truncate">
-                {artwork.description || "No description"}
+                {[artwork.dimensions, artwork.medium].filter(Boolean).join(" · ") ||
+                  "No details"}
               </p>
             </div>
             <div className="flex items-center gap-1 shrink-0">

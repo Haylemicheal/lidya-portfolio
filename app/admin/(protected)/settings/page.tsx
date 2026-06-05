@@ -6,14 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import ImageUpload from "@/components/admin/ImageUpload";
-import type { ContactMethod, SiteContent } from "@/lib/types";
+import type { ContactMethod, Exhibition, SiteContent } from "@/lib/types";
 import { Plus, Trash2 } from "lucide-react";
 
 const emptyContent: SiteContent = {
-  hero: { title: "", subtitle: "", backgroundImage: "" },
-  about: { title: "", paragraphs: [""], portraitImage: "" },
+  hero: { title: "", subtitle: "", backgroundImage: "", featuredImages: [] },
+  about: { title: "", paragraphs: [""], pullQuote: "", portraitImage: "" },
   portfolio: { title: "", description: "" },
-  contact: { title: "", description: "", methods: [] },
+  commissions: { title: "Work With Me", description: "", items: [] },
+  exhibitions: { title: "Selected Shows", items: [] },
+  contact: { title: "", description: "", inquiryEmail: "", methods: [] },
 };
 
 export default function AdminSettingsPage() {
@@ -25,8 +27,17 @@ export default function AdminSettingsPage() {
   useEffect(() => {
     fetch("/api/content")
       .then((res) => res.json())
-      .then((data) => {
-        setContent(data);
+      .then((data: SiteContent) => {
+        setContent({
+          ...emptyContent,
+          ...data,
+          hero: { ...emptyContent.hero, ...data.hero },
+          about: { ...emptyContent.about, ...data.about },
+          portfolio: { ...emptyContent.portfolio, ...data.portfolio },
+          commissions: { ...emptyContent.commissions, ...data.commissions },
+          exhibitions: { ...emptyContent.exhibitions, ...data.exhibitions },
+          contact: { ...emptyContent.contact, ...data.contact },
+        });
         setLoading(false);
       });
   }, []);
@@ -82,6 +93,58 @@ export default function AdminSettingsPage() {
     });
   };
 
+  const updateExhibition = (index: number, field: keyof Exhibition, value: string | number) => {
+    const items = [...content.exhibitions.items];
+    items[index] = { ...items[index], [field]: value };
+    setContent({ ...content, exhibitions: { ...content.exhibitions, items } });
+  };
+
+  const addExhibition = () => {
+    setContent({
+      ...content,
+      exhibitions: {
+        ...content.exhibitions,
+        items: [...content.exhibitions.items, { year: new Date().getFullYear(), title: "", venue: "" }],
+      },
+    });
+  };
+
+  const removeExhibition = (index: number) => {
+    setContent({
+      ...content,
+      exhibitions: {
+        ...content.exhibitions,
+        items: content.exhibitions.items.filter((_, i) => i !== index),
+      },
+    });
+  };
+
+  const updateCommissionItem = (index: number, value: string) => {
+    const items = [...content.commissions.items];
+    items[index] = value;
+    setContent({ ...content, commissions: { ...content.commissions, items } });
+  };
+
+  const addCommissionItem = () => {
+    setContent({
+      ...content,
+      commissions: {
+        ...content.commissions,
+        items: [...content.commissions.items, ""],
+      },
+    });
+  };
+
+  const removeCommissionItem = (index: number) => {
+    setContent({
+      ...content,
+      commissions: {
+        ...content.commissions,
+        items: content.commissions.items.filter((_, i) => i !== index),
+      },
+    });
+  };
+
   if (loading) {
     return <p className="text-muted-foreground">Loading settings...</p>;
   }
@@ -132,6 +195,26 @@ export default function AdminSettingsPage() {
               setContent({ ...content, hero: { ...content.hero, backgroundImage: url } })
             }
           />
+          <div className="space-y-2">
+            <Label>Featured hero images (one URL per line)</Label>
+            <Textarea
+              value={(content.hero.featuredImages ?? []).join("\n")}
+              onChange={(e) =>
+                setContent({
+                  ...content,
+                  hero: {
+                    ...content.hero,
+                    featuredImages: e.target.value
+                      .split("\n")
+                      .map((line) => line.trim())
+                      .filter(Boolean),
+                  },
+                })
+              }
+              rows={4}
+              placeholder="/media/art3.jpg"
+            />
+          </div>
         </section>
 
         <section className="bg-background border border-border rounded-xl p-6 space-y-4">
@@ -143,6 +226,20 @@ export default function AdminSettingsPage() {
               onChange={(e) =>
                 setContent({ ...content, about: { ...content.about, title: e.target.value } })
               }
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>Pull Quote</Label>
+            <Textarea
+              value={content.about.pullQuote ?? ""}
+              onChange={(e) =>
+                setContent({
+                  ...content,
+                  about: { ...content.about, pullQuote: e.target.value },
+                })
+              }
+              rows={3}
+              placeholder="A highlighted quote for the about section"
             />
           </div>
           {content.about.paragraphs.map((paragraph, index) => (
@@ -215,6 +312,121 @@ export default function AdminSettingsPage() {
 
         <section className="bg-background border border-border rounded-xl p-6 space-y-4">
           <div className="flex items-center justify-between">
+            <h2 className="font-serif text-xl font-semibold">Commissions Section</h2>
+            <Button variant="outline" size="sm" onClick={addCommissionItem}>
+              <Plus size={16} />
+              Add Item
+            </Button>
+          </div>
+          <div className="space-y-2">
+            <Label>Title</Label>
+            <Input
+              value={content.commissions.title}
+              onChange={(e) =>
+                setContent({
+                  ...content,
+                  commissions: { ...content.commissions, title: e.target.value },
+                })
+              }
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>Description</Label>
+            <Textarea
+              value={content.commissions.description}
+              onChange={(e) =>
+                setContent({
+                  ...content,
+                  commissions: { ...content.commissions, description: e.target.value },
+                })
+              }
+              rows={2}
+            />
+          </div>
+          {content.commissions.items.map((item, index) => (
+            <div key={index} className="flex gap-2">
+              <Input
+                value={item}
+                onChange={(e) => updateCommissionItem(index, e.target.value)}
+                placeholder="Commission or collaboration type"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => removeCommissionItem(index)}
+                className="text-destructive hover:text-destructive shrink-0"
+              >
+                <Trash2 size={16} />
+              </Button>
+            </div>
+          ))}
+        </section>
+
+        <section className="bg-background border border-border rounded-xl p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="font-serif text-xl font-semibold">Exhibitions Section</h2>
+            <Button variant="outline" size="sm" onClick={addExhibition}>
+              <Plus size={16} />
+              Add Show
+            </Button>
+          </div>
+          <div className="space-y-2">
+            <Label>Section Title</Label>
+            <Input
+              value={content.exhibitions.title}
+              onChange={(e) =>
+                setContent({
+                  ...content,
+                  exhibitions: { ...content.exhibitions, title: e.target.value },
+                })
+              }
+            />
+          </div>
+          {content.exhibitions.items.map((item, index) => (
+            <div key={index} className="border border-border rounded-lg p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium">Show {index + 1}</p>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => removeExhibition(index)}
+                  className="text-destructive hover:text-destructive"
+                >
+                  <Trash2 size={16} />
+                </Button>
+              </div>
+              <div className="grid sm:grid-cols-3 gap-3">
+                <div className="space-y-2">
+                  <Label>Year</Label>
+                  <Input
+                    type="number"
+                    value={item.year}
+                    onChange={(e) =>
+                      updateExhibition(index, "year", parseInt(e.target.value, 10) || item.year)
+                    }
+                  />
+                </div>
+                <div className="space-y-2 sm:col-span-2">
+                  <Label>Title</Label>
+                  <Input
+                    value={item.title}
+                    onChange={(e) => updateExhibition(index, "title", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2 sm:col-span-3">
+                  <Label>Venue</Label>
+                  <Input
+                    value={item.venue}
+                    onChange={(e) => updateExhibition(index, "venue", e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </section>
+
+        <section className="bg-background border border-border rounded-xl p-6 space-y-4">
+          <div className="flex items-center justify-between">
             <h2 className="font-serif text-xl font-semibold">Contact Section</h2>
             <Button variant="outline" size="sm" onClick={addContactMethod}>
               <Plus size={16} />
@@ -244,6 +456,20 @@ export default function AdminSettingsPage() {
                 })
               }
               rows={2}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>Inquiry form recipient email</Label>
+            <Input
+              type="email"
+              value={content.contact.inquiryEmail}
+              onChange={(e) =>
+                setContent({
+                  ...content,
+                  contact: { ...content.contact, inquiryEmail: e.target.value },
+                })
+              }
+              placeholder="artist@example.com"
             />
           </div>
           {content.contact.methods.map((method, index) => (

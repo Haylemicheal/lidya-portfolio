@@ -77,10 +77,21 @@ export function resolveContentForDisplay(content: SiteContent): SiteContent {
     hero: {
       ...content.hero,
       backgroundImage: resolveDisplayImageUrl(content.hero.backgroundImage),
+      featuredImages: content.hero.featuredImages?.map(resolveDisplayImageUrl),
     },
     about: {
       ...content.about,
       portraitImage: resolveDisplayImageUrl(content.about.portraitImage),
+    },
+    commissions: content.commissions ?? {
+      title: "Work With Me",
+      description: "",
+      items: [],
+    },
+    exhibitions: content.exhibitions ?? { title: "Selected Shows", items: [] },
+    contact: {
+      ...content.contact,
+      inquiryEmail: content.contact.inquiryEmail ?? "",
     },
   };
 }

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAuth } from "@/lib/api-auth";
 import { getSiteContent, saveSiteContent } from "@/lib/content";
 import { resolveContentForDisplay } from "@/lib/storage";
@@ -20,6 +21,8 @@ export async function PUT(request: NextRequest) {
   try {
     const body = (await request.json()) as SiteContent;
     await saveSiteContent(body);
+    revalidatePath("/");
+    revalidatePath("/work", "layout");
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to save content" }, { status: 500 });

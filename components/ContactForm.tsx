@@ -14,9 +14,12 @@ interface ContactFormProps {
   methods: ContactMethod[];
 }
 
-const ContactForm = ({ methods }: ContactFormProps) => {
+export default function ContactForm({ methods }: ContactFormProps) {
   return (
     <div className="max-w-4xl mx-auto">
+      <p className="text-center text-sm text-muted-foreground mb-6">
+        Or reach out directly
+      </p>
       <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
         {methods.map((method) => {
           const Icon = iconMap[method.type] ?? Mail;
@@ -29,12 +32,12 @@ const ContactForm = ({ methods }: ContactFormProps) => {
               <a
                 href={method.href}
                 {...linkProps}
-                className="flex flex-col items-center gap-3 p-6 sm:p-8 rounded-lg border border-border bg-card hover:border-foreground/30 hover:shadow-md transition-all duration-300 group"
+                className="flex flex-col items-center gap-3 p-6 sm:p-8 rounded-lg border border-border bg-card hover:border-accent/40 hover:shadow-md transition-all duration-300 group"
               >
-                <div className="p-3 rounded-full bg-muted group-hover:bg-foreground group-hover:text-background transition-colors duration-300">
+                <div className="p-3 rounded-full bg-muted group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300">
                   <Icon
                     size={24}
-                    className="text-foreground group-hover:text-background transition-colors"
+                    className="text-foreground group-hover:text-accent-foreground transition-colors"
                   />
                 </div>
                 <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
@@ -50,6 +53,4 @@ const ContactForm = ({ methods }: ContactFormProps) => {
       </div>
     </div>
   );
-};
-
-export default ContactForm;
+}
