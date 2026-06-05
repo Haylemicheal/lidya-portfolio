@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
-import { promises as fs } from "fs";
 import { requireAuth } from "@/lib/api-auth";
-import { ensureUploadsDir } from "@/lib/content";
+import { uploadImage, USE_BLOB } from "@/lib/storage";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 const MAX_SIZE = 10 * 1024 * 1024;
@@ -10,6 +9,16 @@ const MAX_SIZE = 10 * 1024 * 1024;
 export async function POST(request: NextRequest) {
   const authError = await requireAuth();
   if (authError) return authError;
+
+  if (!USE_BLOB && process.env.VERCEL === "1") {
+    return NextResponse.json(
+      {
+        error:
+          "Image uploads require Vercel Blob. Add a Blob store in your Vercel project settings.",
+      },
+      { status: 503 }
+    );
+  }
 
   try {
     const formData = await request.formData();
@@ -33,17 +42,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    await ensureUploadsDir();
-
     const ext = path.extname(file.name) || ".jpg";
     const safeName = `${Date.now()}-${Math.random().toString(36).slice(2, 9)}${ext}`;
-    const filePath = path.join(process.cwd(), "public", "uploads", safeName);
-
     const buffer = Buffer.from(await file.arrayBuffer());
-    await fs.writeFile(filePath, buffer);
+    const url = await uploadImage(safeName, buffer, file.type);
 
-    return NextResponse.json({ url: `/uploads/${safeName}` });
-  } catch {
+    return NextResponse.json({ url });
+  } catch (error) {
+    console.error("Upload failed:", error);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 }

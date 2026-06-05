@@ -6,6 +6,7 @@ import {
   getArtworks,
   saveArtworks,
 } from "@/lib/content";
+import { isManagedUpload } from "@/lib/storage";
 import type { Artwork } from "@/lib/types";
 
 export async function GET(
@@ -44,7 +45,7 @@ export async function PUT(
     const existing = artworks[index];
     const newImage = body.image?.trim() ?? existing.image;
 
-    if (newImage !== existing.image && existing.image.startsWith("/uploads/")) {
+    if (newImage !== existing.image && isManagedUpload(existing.image)) {
       await deleteUploadedImage(existing.image);
     }
 
