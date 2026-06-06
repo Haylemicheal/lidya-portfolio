@@ -47,15 +47,16 @@ export default function ImagineGallery({ items }: ImagineGalleryProps) {
               onClick={() => setActiveItem(item)}
               className="group w-full cursor-pointer overflow-hidden rounded-lg bg-card border border-border hover:border-accent/40 transition-all duration-300 hover:shadow-lg text-left"
             >
-              <div className="relative overflow-hidden bg-muted w-full aspect-[4/3]">
+              <div className="relative overflow-hidden bg-muted w-full">
                 <Image
                   src={item.image}
                   alt={item.title || "Art in a room setting"}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  width={1200}
+                  height={900}
+                  className="w-full h-auto block"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
               </div>
               {item.title && (
                 <div className="p-4 sm:p-5">
