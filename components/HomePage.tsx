@@ -9,25 +9,21 @@ import CommissionsSection from "@/components/CommissionsSection";
 import ExhibitionsSection from "@/components/ExhibitionsSection";
 import ContactForm from "@/components/ContactForm";
 import InquiryForm from "@/components/InquiryForm";
-import type { Artwork, SiteContent } from "@/lib/types";
+import type { Artwork, ImagineItem, SiteContent } from "@/lib/types";
 
 interface HomePageProps {
   content: SiteContent;
   artworks: Artwork[];
+  imagineItems: ImagineItem[];
 }
 
-export default function HomePage({ content, artworks }: HomePageProps) {
+export default function HomePage({ content, artworks, imagineItems }: HomePageProps) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  const featuredImages =
-    content.hero.featuredImages && content.hero.featuredImages.length > 0
-      ? content.hero.featuredImages
-      : artworks.filter((a) => a.featured).map((a) => a.image).slice(0, 4);
 
   return (
     <div className="min-h-screen">
@@ -37,7 +33,6 @@ export default function HomePage({ content, artworks }: HomePageProps) {
         title={content.hero.title}
         subtitle={content.hero.subtitle}
         backgroundImage={content.hero.backgroundImage}
-        featuredImages={featuredImages}
         onViewPortfolio={() => scrollToSection("portfolio")}
         onScrollDown={() => scrollToSection("about")}
       />
@@ -78,7 +73,13 @@ export default function HomePage({ content, artworks }: HomePageProps) {
       <PortfolioSection
         title={content.portfolio.title}
         description={content.portfolio.description}
+        imagineTitle={content.portfolio.imagineItThere?.title ?? "Imagine it There"}
+        imagineDescription={
+          content.portfolio.imagineItThere?.description ??
+          "See how the work looks in real spaces — on walls, in rooms, and in the places you might hang it."
+        }
         artworks={artworks}
+        imagineItems={imagineItems}
       />
 
       <CommissionsSection commissions={content.commissions} />

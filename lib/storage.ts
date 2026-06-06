@@ -1,7 +1,7 @@
 import { del, get, put, type PutCommandOptions } from "@vercel/blob";
 import { promises as fs } from "fs";
 import path from "path";
-import type { Artwork, SiteContent } from "./types";
+import type { Artwork, ImagineItem, SiteContent } from "./types";
 import { getInquiryRecipient } from "./contact-utils";
 
 export function getBlobAccess(): "public" | "private" {
@@ -69,6 +69,13 @@ export function resolveArtworksForDisplay(artworks: Artwork[]): Artwork[] {
   return artworks.map((artwork) => ({
     ...artwork,
     image: resolveDisplayImageUrl(artwork.image),
+  }));
+}
+
+export function resolveImagineItemsForDisplay(items: ImagineItem[]): ImagineItem[] {
+  return items.map((item) => ({
+    ...item,
+    image: resolveDisplayImageUrl(item.image),
   }));
 }
 

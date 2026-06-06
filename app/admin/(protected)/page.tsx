@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { getArtworks, getSiteContent } from "@/lib/content";
+import { getArtworks, getImagineItems, getSiteContent } from "@/lib/content";
 import { Button } from "@/components/ui/button";
-import { Image, Settings } from "lucide-react";
+import { Frame, Image, Settings } from "lucide-react";
 
 export default async function AdminDashboard() {
-  const [content, artworks] = await Promise.all([
+  const [content, artworks, imagineItems] = await Promise.all([
     getSiteContent(),
     getArtworks(),
+    getImagineItems(),
   ]);
 
   return (
@@ -22,8 +23,8 @@ export default async function AdminDashboard() {
           <p className="text-3xl font-semibold">{artworks.length}</p>
         </div>
         <div className="bg-background border border-border rounded-xl p-6">
-          <p className="text-sm text-muted-foreground mb-1">Site Title</p>
-          <p className="text-lg font-medium truncate">{content.hero.title}</p>
+          <p className="text-sm text-muted-foreground mb-1">Room Mockups</p>
+          <p className="text-3xl font-semibold">{imagineItems.length}</p>
         </div>
         <div className="bg-background border border-border rounded-xl p-6">
           <p className="text-sm text-muted-foreground mb-1">Contact Methods</p>
@@ -39,6 +40,17 @@ export default async function AdminDashboard() {
               <p className="font-medium">Manage Artworks</p>
               <p className="text-xs font-normal opacity-80">
                 Upload, edit, delete, and reorder paintings
+              </p>
+            </div>
+          </Link>
+        </Button>
+        <Button asChild variant="outline" size="lg" className="h-auto py-6 justify-start gap-4">
+          <Link href="/admin/imagine">
+            <Frame size={24} />
+            <div className="text-left">
+              <p className="font-medium">Imagine it There</p>
+              <p className="text-xs font-normal opacity-80">
+                Upload room mockups showing art in real spaces
               </p>
             </div>
           </Link>

@@ -4,11 +4,12 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ExternalLink, Image, LayoutDashboard, LogOut, Settings } from "lucide-react";
+import { ExternalLink, Frame, Image, LayoutDashboard, LogOut, Settings } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/artworks", label: "Artworks", icon: Image },
+  { href: "/admin/imagine", label: "Imagine it There", icon: Frame },
   { href: "/admin/settings", label: "Site Settings", icon: Settings },
 ];
 

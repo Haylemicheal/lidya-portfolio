@@ -54,6 +54,10 @@ export interface SiteContent {
   portfolio: {
     title: string;
     description: string;
+    imagineItThere?: {
+      title: string;
+      description: string;
+    };
   };
   commissions: {
     title: string;
@@ -74,6 +78,17 @@ export interface SiteContent {
 
 export interface ArtworksData {
   artworks: Artwork[];
+}
+
+export interface ImagineItem {
+  id: string;
+  title?: string;
+  image: string;
+  order: number;
+}
+
+export interface ImagineItemsData {
+  items: ImagineItem[];
 }
 
 export interface ContactInquiry {

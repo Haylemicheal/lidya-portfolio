@@ -1,7 +1,7 @@
 import path from "path";
 import { unstable_noStore as noStore } from "next/cache";
 import { normalizeArtwork } from "./artwork-utils";
-import type { Artwork, ArtworksData, SiteContent } from "./types";
+import type { Artwork, ArtworksData, ImagineItem, ImagineItemsData, SiteContent } from "./types";
 import {
   deleteManagedImage,
   readJsonFile,
@@ -13,6 +13,8 @@ const CONTENT_FILE = path.join(DATA_DIR, "content.json");
 const ARTWORKS_FILE = path.join(DATA_DIR, "artworks.json");
 const CONTENT_BLOB_PATH = "data/content.json";
 const ARTWORKS_BLOB_PATH = "data/artworks.json";
+const IMAGINE_ITEMS_FILE = path.join(DATA_DIR, "imagine-items.json");
+const IMAGINE_ITEMS_BLOB_PATH = "data/imagine-items.json";
 
 export async function getSiteContent(): Promise<SiteContent> {
   noStore();
@@ -48,6 +50,29 @@ export async function getArtworkById(id: string): Promise<Artwork | undefined> {
 
 export function generateId(): string {
   return `art-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
+export function generateImagineId(): string {
+  return `imagine-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+}
+
+export async function getImagineItems(): Promise<ImagineItem[]> {
+  noStore();
+  const data = await readJsonFile<ImagineItemsData>(
+    IMAGINE_ITEMS_FILE,
+    IMAGINE_ITEMS_BLOB_PATH
+  );
+  return data.items.sort((a, b) => a.order - b.order);
+}
+
+export async function getImagineItemById(id: string): Promise<ImagineItem | undefined> {
+  const items = await getImagineItems();
+  return items.find((item) => item.id === id);
+}
+
+export async function saveImagineItems(items: ImagineItem[]): Promise<void> {
+  const data: ImagineItemsData = { items };
+  await writeJsonFile(IMAGINE_ITEMS_FILE, IMAGINE_ITEMS_BLOB_PATH, data);
 }
 
 export async function deleteUploadedImage(imagePath: string): Promise<void> {

@@ -22,7 +22,11 @@
   },
   "portfolio": {
     "title": "Selected Works",
-    "description": "Paintings exploring women, social issues, community, and the enduring search for hope — rooted in personal and collective experience."
+    "description": "Paintings exploring women, social issues, community, and the enduring search for hope — rooted in personal and collective experience.",
+    "imagineItThere": {
+      "title": "Imagine it There",
+      "description": "See how the work looks in real spaces — on walls, in rooms, and in the places you might hang it."
+    }
   },
   "commissions": {
     "title": "Work With Me",

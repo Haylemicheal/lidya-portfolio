@@ -12,7 +12,11 @@ import { Plus, Trash2 } from "lucide-react";
 const emptyContent: SiteContent = {
   hero: { title: "", subtitle: "", backgroundImage: "", featuredImages: [] },
   about: { title: "", paragraphs: [""], pullQuote: "", portraitImage: "" },
-  portfolio: { title: "", description: "" },
+  portfolio: {
+    title: "",
+    description: "",
+    imagineItThere: { title: "Imagine it There", description: "" },
+  },
   commissions: { title: "Work With Me", description: "", items: [] },
   exhibitions: { title: "Selected Shows", items: [] },
   contact: { title: "", description: "", inquiryEmail: "", methods: [] },
@@ -33,7 +37,17 @@ export default function AdminSettingsPage() {
           ...data,
           hero: { ...emptyContent.hero, ...data.hero },
           about: { ...emptyContent.about, ...data.about },
-          portfolio: { ...emptyContent.portfolio, ...data.portfolio },
+          portfolio: {
+            ...emptyContent.portfolio,
+            ...data.portfolio,
+            imagineItThere: {
+              title:
+                data.portfolio?.imagineItThere?.title ??
+                emptyContent.portfolio.imagineItThere?.title ??
+                "Imagine it There",
+              description: data.portfolio?.imagineItThere?.description ?? "",
+            },
+          },
           commissions: { ...emptyContent.commissions, ...data.commissions },
           exhibitions: { ...emptyContent.exhibitions, ...data.exhibitions },
           contact: { ...emptyContent.contact, ...data.contact },
@@ -284,7 +298,7 @@ export default function AdminSettingsPage() {
         <section className="bg-background border border-border rounded-xl p-6 space-y-4">
           <h2 className="font-serif text-xl font-semibold">Portfolio Section</h2>
           <div className="space-y-2">
-            <Label>Title</Label>
+            <Label>Artworks Tab Title</Label>
             <Input
               value={content.portfolio.title}
               onChange={(e) =>
@@ -296,7 +310,7 @@ export default function AdminSettingsPage() {
             />
           </div>
           <div className="space-y-2">
-            <Label>Description</Label>
+            <Label>Artworks Tab Description</Label>
             <Textarea
               value={content.portfolio.description}
               onChange={(e) =>
@@ -307,6 +321,46 @@ export default function AdminSettingsPage() {
               }
               rows={3}
             />
+          </div>
+          <div className="border-t border-border pt-4 space-y-4">
+            <h3 className="font-medium">Imagine it There Tab</h3>
+            <div className="space-y-2">
+              <Label>Title</Label>
+              <Input
+                value={content.portfolio.imagineItThere?.title ?? ""}
+                onChange={(e) =>
+                  setContent({
+                    ...content,
+                    portfolio: {
+                      ...content.portfolio,
+                      imagineItThere: {
+                        title: e.target.value,
+                        description: content.portfolio.imagineItThere?.description ?? "",
+                      },
+                    },
+                  })
+                }
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Description</Label>
+              <Textarea
+                value={content.portfolio.imagineItThere?.description ?? ""}
+                onChange={(e) =>
+                  setContent({
+                    ...content,
+                    portfolio: {
+                      ...content.portfolio,
+                      imagineItThere: {
+                        title: content.portfolio.imagineItThere?.title ?? "Imagine it There",
+                        description: e.target.value,
+                      },
+                    },
+                  })
+                }
+                rows={3}
+              />
+            </div>
           </div>
         </section>
 

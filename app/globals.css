@@ -57,19 +57,6 @@
     text-wrap: balance;
   }
 
-  .hero-ken-burns {
-    animation: ken-burns 24s ease-in-out infinite alternate;
-  }
-
-  @keyframes ken-burns {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(1.08);
-    }
-  }
-
   .masonry-grid {
     column-count: 1;
     column-gap: 1.5rem;
