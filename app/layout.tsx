@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { getSiteContent } from "@/lib/content";
 import { resolveContentForDisplay } from "@/lib/storage";
 import "./globals.css";
@@ -53,7 +54,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <GoogleAnalytics />
+      </body>
     </html>
   );
 }
